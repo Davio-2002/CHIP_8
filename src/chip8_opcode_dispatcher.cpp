@@ -86,7 +86,7 @@ namespace {
     };
 } // anonymous namespace
 
-namespace DISPATCH {
+namespace DISPATCHER {
     void execute_opcode(Ref<EMULATOR::Chip8> chip8) {
         const auto opcode = chip8.get_opcode();
         const auto index = (opcode & 0xF000u) >> 12; // NOT confuse with `I` register

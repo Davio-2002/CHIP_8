@@ -219,7 +219,7 @@ void OPCODES::OpCode_DXYN(Ref<EMULATOR::Chip8> chip8) {
     for (u8 row = 0; row < height; ++row) {
         const u8 spriteByte = memory[chip8.get_register_I() + row];
         for (u8 col = 0; col < 8; ++col) {
-            const u8 spritePixel = spriteByte & 0x80 >> col;
+            const u8 spritePixel = spriteByte & (0x80 >> col);
             const auto screenPixel = &chip8.get_video()[(y_pos + row) * SCREEN_WIDTH + (x_pos + col)];
 
             if (spritePixel)
@@ -243,7 +243,7 @@ void OPCODES::OpCode_EX9E(Ref<EMULATOR::Chip8> chip8) {
     const u8 key = registers[Vx];
     const auto& keypad = chip8.get_keyboard();
 
-    if (!keypad[key]) {
+    if (keypad[key]) {
         chip8.advance_pc();
     }
 }
@@ -254,7 +254,7 @@ void OPCODES::OpCode_EXA1(Ref<EMULATOR::Chip8> chip8) {
     const auto& keypad = chip8.get_keyboard();
     const u8 key = registers[Vx];
 
-    if (keypad[key]) {
+    if (!keypad[key]) {
         chip8.advance_pc();
     }
 }
