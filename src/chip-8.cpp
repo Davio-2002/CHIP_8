@@ -1,5 +1,6 @@
 // © Copyright Davio-2002
 
+#include <cassert>
 #include <chip-8.hpp>
 #include <chip8_opcode_dispatcher.hpp>
 #include <fstream>
@@ -149,6 +150,10 @@ namespace EMULATOR {
     }
 
     void Chip8::emulate_cycle() {
+        assert(pc + 1 < MEMORY_SIZE && "Program counter out of memory bounds");
+        if (pc + 1 >= MEMORY_SIZE) {
+            throw std::out_of_range("Program counter out of memory bounds");
+        }
         opcode = (memory[pc] << 8u) | memory[pc + 1];
 
         advance_pc();
