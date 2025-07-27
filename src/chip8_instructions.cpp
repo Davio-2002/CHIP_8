@@ -304,7 +304,7 @@ void OPCODES::OpCode_FX1E(Ref<EMULATOR::Chip8> chip8) {
     const u8 Vx = chip8.get_Vx();
     const auto& registers = chip8.get_registers();
 
-    chip8.set_register_I(registers[Vx]);
+    chip8.set_register_I(chip8.get_register_I() + registers[Vx]);
 }
 
 void OPCODES::OpCode_FX29(Ref<EMULATOR::Chip8> chip8) {
