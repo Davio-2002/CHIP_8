@@ -12,7 +12,12 @@ namespace EMULATOR {
         explicit Chip8() noexcept;
 
         //// Main methods
-        void load_rom(const char *filename);
+        /**
+         * Load a ROM from disk into emulator memory.
+         * @param filename path to the ROM file
+         * @return true when the ROM was successfully loaded
+         */
+        bool load_rom(const char *filename);
 
         void emulate_cycle();
 
