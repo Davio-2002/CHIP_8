@@ -6,6 +6,7 @@
 #include <vector>
 #include <fonts.h>
 #include <chrono>
+#include <iostream>
 
 namespace EMULATOR {
     Chip8::Chip8() noexcept: randGen(std::chrono::system_clock::now().time_since_epoch().count()) {
@@ -116,23 +117,35 @@ namespace EMULATOR {
 
     /* End Getters */
 
-    void Chip8::load_rom(const char *filename) {
+    bool Chip8::load_rom(const char *filename) {
         // Open the file as a stream of binary and move the file pointer to the end (.ate)
         std::ifstream file(filename, std::ios::binary | std::ios::ate);
 
-        if (file.is_open()) {
-            // Get the size of a file and allocate a buffer to hold the contents
-            const std::streampos fileSize = file.tellg();
-            std::vector<char> buffer(fileSize);
-
-            // Go back to the beginning of the file and fill the buffer
-            file.seekg(0, std::ios::beg);
-            file.read(buffer.data(), fileSize);
-            file.close();
-
-            // Copy buffer contents to memory
-            std::ranges::copy(buffer, memory.begin() + START_ADDRESS);
+        if (!file.is_open()) {
+            std::cerr << "Failed to open ROM: " << filename << std::endl;
+            return false;
         }
+
+        // Get the size of the file and ensure it fits into memory
+        const std::streampos fileSize = file.tellg();
+        if (START_ADDRESS + fileSize > MEMORY_SIZE) {
+            std::cerr << "ROM is too large to fit into memory (" << fileSize << " bytes)" << std::endl;
+            return false;
+        }
+
+        std::vector<char> buffer(fileSize);
+
+        // Go back to the beginning of the file and fill the buffer
+        file.seekg(0, std::ios::beg);
+        if (!file.read(buffer.data(), fileSize)) {
+            std::cerr << "Failed to read ROM: " << filename << std::endl;
+            return false;
+        }
+        file.close();
+
+        // Copy buffer contents to memory
+        std::copy(buffer.begin(), buffer.end(), memory.begin() + START_ADDRESS);
+        return true;
     }
 
     void Chip8::emulate_cycle() {
