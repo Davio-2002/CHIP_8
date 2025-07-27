@@ -1,6 +1,7 @@
 // © Copyright Davio-2002
 
 #include <chip-8.hpp>
+#include <chip8_opcode_dispatcher.hpp>
 #include <fstream>
 #include <vector>
 #include <fonts.h>
@@ -134,7 +135,19 @@ namespace EMULATOR {
         }
     }
 
-    // void Chip8::emulate_cycle() {
-    //
-    // }
+    void Chip8::emulate_cycle() {
+        opcode = (memory[pc] << 8u) | memory[pc + 1];
+
+        advance_pc();
+
+        DISPATCHER::execute_opcode(*this);
+
+        if (delayTimer > 0) {
+            --delayTimer;
+        }
+
+        if (soundTimer > 0) {
+            --soundTimer;
+        }
+    }
 } // namespace EMULATOR
