@@ -92,4 +92,4 @@ namespace DISPATCHER {
         const auto index = (opcode & 0xF000u) >> 12; // NOT confuse with `I` register
         mainTable[index](chip8);
     }
-} // namespace DISPATCH
+} // namespace DISPATCHER
