@@ -13,7 +13,7 @@ namespace EMULATOR {
 
         //// Main methods
         /**
-         * Load a ROM from disk into emulator memory.
+         * Load a ROM from the disk into emulator memory.
          * @param filename path to the ROM file
          * @return true when the ROM was successfully loaded
          */
