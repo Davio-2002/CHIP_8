@@ -2,6 +2,10 @@
 
 This project implements a simple CHIP‑8 emulator written in C++20. Video and keyboard interaction are provided through [SDL2](https://www.libsdl.org/). The source code is split into a small collection of headers and source files with CMake build support.
 
+# Demo
+
+https://github.com/user-attachments/assets/f5c827ad-1ed1-4620-a5d4-5bcc7bd3babc
+
 ## Requirements
 
 - **CMake** 3.16 or newer
