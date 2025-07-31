@@ -23,6 +23,8 @@ add_executable(CHIP_8
         src/chip8_instructions.cpp
         include/chip8_opcode_dispatcher.hpp
         src/chip8_opcode_dispatcher.cpp
+        include/platform.hpp
+        src/platform.cpp
 )
 
 # link SDL2
