@@ -4,6 +4,9 @@
 
 #include <type_aliases.hpp>
 
+constexpr auto TITLE = "CHIP-8 Emulator";
+
+
 // Chip-8 configuration
 constexpr u16 SCREEN_WIDTH = 64;
 constexpr u16 SCREEN_HEIGHT = 32;
