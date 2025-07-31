@@ -24,7 +24,6 @@ add_executable(CHIP_8
         include/chip8_opcode_dispatcher.hpp
         src/chip8_opcode_dispatcher.cpp
         include/platform.hpp
-        src/platform.cpp
 )
 
 # link SDL2
