@@ -219,19 +219,18 @@ void OPCODES::OpCode_DXYN(Ref<EMULATOR::Chip8> chip8) {
     for (u8 row = 0; row < height; ++row) {
         const u8 spriteByte = memory[chip8.get_register_I() + row];
         for (u8 col = 0; col < 8; ++col) {
-            const u8 spritePixel = spriteByte & (0x80 >> col);
-            const auto screenPixel = &chip8.get_video()[(y_pos + row) * SCREEN_WIDTH + (x_pos + col)];
+            if (spriteByte & 0x80 >> col) {
+                const int screenX = (x_pos + col) % SCREEN_WIDTH;
+                const int screenY = (y_pos + row) % SCREEN_HEIGHT;
 
-            if (spritePixel)
-            {
-                // Screen pixel also on - collision
-                if (*screenPixel == 0xFFFFFFFF)
-                {
+                auto& video = chip8.get_video();
+                auto& pixel = video[screenY * SCREEN_WIDTH + screenX];
+
+                if (pixel == 0xFFFFFFFF) {
                     registers[0xF] = 1;
                 }
 
-                // Effectively XOR with the sprite pixel
-                *screenPixel ^= 0xFFFFFFFF;
+                pixel ^= 0xFFFFFFFF;
             }
         }
     }

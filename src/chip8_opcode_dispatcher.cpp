@@ -10,7 +10,7 @@ namespace {
 
     // Secondary tables
     constexpr auto make_table0() {
-        std::array<DISPATCHER::OpFunc, 0x10> t{};
+        std::array<DISPATCHER::OpFunc, 0xE + 1> t{};
         t.fill(OP_NULL);
         t[0x0] = OPCODES::OpCode_00E0;
         t[0xE] = OPCODES::OpCode_00EE;
@@ -18,7 +18,7 @@ namespace {
     }
 
     constexpr auto make_table8() {
-        std::array<DISPATCHER::OpFunc, 0x10> t{};
+        std::array<DISPATCHER::OpFunc, 0xE + 1> t{};
         t.fill(OP_NULL);
         t[0x0] = OPCODES::OpCode_8XY0;
         t[0x1] = OPCODES::OpCode_8XY1;
@@ -33,7 +33,7 @@ namespace {
     }
 
     constexpr auto make_tableE() {
-        std::array<DISPATCHER::OpFunc, 0x10> t{};
+        std::array<DISPATCHER::OpFunc, 0xE + 1> t{};
         t.fill(OP_NULL);
         t[0x1] = OPCODES::OpCode_EXA1;
         t[0xE] = OPCODES::OpCode_EX9E;
