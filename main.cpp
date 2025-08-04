@@ -5,8 +5,7 @@
 #include <chrono>
 #include <chip-8.hpp>
 
-int main(int argc, char** argv)
-{
+int main(const int argc, char **argv) {
     if (argc != 4)
     {
         std::cerr << "Usage: " << argv[0] << " <Scale> <Delay> <ROM>\n";
