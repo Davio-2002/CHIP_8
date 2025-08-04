@@ -45,6 +45,8 @@ Example:
 ./CHIP_8 10 2 ../roms/PONG.ch8
 ```
 
+You can get more games following this link -> https://github.com/kripod/chip8-roms
+
 ## Key Mapping
 
 The emulator maps your keyboard to the CHIP‑8 hexadecimal keypad as follows:
